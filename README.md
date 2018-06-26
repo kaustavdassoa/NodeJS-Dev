@@ -16,3 +16,6 @@ git push -u origin master
 
 git remote add origin https://github.com/kaustavdassoa/NodeJS-Dev.git
 git push -u origin master
+
+git log --graph --abbrev-commit --decorate
+git log --graph --oneline --decorate
