@@ -1,0 +1,16 @@
+{
+  "name": "express-translation-service",
+  "version": "1.0.0",
+  "description": "express translation service",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "kaustav.das",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "google-translate-api": "^2.3.0"
+  }
+}
