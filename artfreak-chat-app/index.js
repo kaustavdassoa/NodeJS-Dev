@@ -45,12 +45,13 @@ app.post('/webhook/', function (req, res) {
 		let sender = event.sender.id
 		if (event.message && event.message.text) {
 			let text = event.message.text
-			if (text === 'Generic'){ 
-				console.log("welcome to chatbot")
+			if (text === 'Hi'){ 
+				sendTextMessage(sender, "Welcome to Artfreak. What can I do for you ?")
 				//sendGenericMessage(sender)
 				continue
 			}
-			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
+			//sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
+			sendTextMessage(sender, "Thank You for your message :"+text.substring(0, 200))
 		}
 		if (event.postback) {
 			let text = JSON.stringify(event.postback)
@@ -63,14 +64,13 @@ app.post('/webhook/', function (req, res) {
 
 
 // recommended to inject access tokens as environmental variables, e.g.
-// const token = process.env.FB_PAGE_ACCESS_TOKEN
-const token = "<FB_PAGE_ACCESS_TOKEN>"
+const token = "EAAGAWqs7IqYBALTIDhZC8jJ68jsZCrMEoSjjmzixV0OZAgXzR5fvE1TaXkymkJ9TgMW5LMqZANAY1hBiQXKtBLWpevXrqxhqdb51uzxjlnGcM8k3RCJ8wb0R7kBZBGIbpaZCAyouPV9qMjsyQ22THkqwooDnNwYpIznIovnZCCJgdZCM3ZA1enCZCO";
 
 function sendTextMessage(sender, text) {
 	let messageData = { text:text }
 	
 	request({
-		url: 'https://graph.facebook.com/v2.6/me/messages',
+		url: 'https://graph.facebook.com/v3.1/me/messages',
 		qs: {access_token:token},
 		method: 'POST',
 		json: {
@@ -119,7 +119,7 @@ function sendGenericMessage(sender) {
 		}
 	}
 	request({
-		url: 'https://graph.facebook.com/v2.6/me/messages',
+		url: 'https://graph.facebook.com/v3.1/me/messages',
 		qs: {access_token:token},
 		method: 'POST',
 		json: {
