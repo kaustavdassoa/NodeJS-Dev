@@ -7,9 +7,9 @@ This is a demo repository to host & store all my node JS sample applications. Ov
 
 ###### **express-translation-service**|*Translation server app that translate any string into target language*||AddedOn:06/27/2018 
 
-###### **artfreak-chat-app**|*facebook webhook for nodejs application *||AddedOn:07/29/2018  
+###### **artfreak-chat-app**|*facebook webhook for nodejs application*||AddedOn:07/29/2018  
 
-###### **express-chat-app**|*Express Chat Application *||AddedOn:08/04/2018 
+###### **express-chat-app**|*Express Chat Application*||AddedOn:08/04/2018 
 
 # Git Commands
 
@@ -25,5 +25,15 @@ This is a demo repository to host & store all my node JS sample applications. Ov
 
 - git log --graph --abbrev-commit --decorate
 - git log --graph --oneline --decorate
+
+```
+
+
+# Heroku Commands
+
+```
+$ git add .
+$ git commit -am "make it better"
+$ git push heroku master
 
 ```
