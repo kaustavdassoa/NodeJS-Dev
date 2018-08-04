@@ -9,7 +9,7 @@ This is a demo repository to host & store all my node JS sample applications. Ov
 
 ###### **artfreak-chat-app**|*facebook webhook for nodejs application*||AddedOn:07/29/2018  
 
-###### **express-chat-app**|*Express Chat Application*||AddedOn:08/04/2018 
+###### **express-chat-app**|*Express Chat Application*||AddedOn:08/04/2018 [APP URL](https://kaustavdassoa.herokuapp.com/)
 
 # Git Commands
 
@@ -32,8 +32,14 @@ This is a demo repository to host & store all my node JS sample applications. Ov
 # Heroku Commands
 
 ```
+$ heroku login
+$ heroku create
+cd express-chat-app/
+$ git init
+$ heroku git:remote -a kaustadassoa
 $ git add .
-$ git commit -am "make it better"
+$ git commit -am "intial commit"
 $ git push heroku master
+$ heroku logs --tail
 
 ```
