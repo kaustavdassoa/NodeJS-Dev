@@ -3,7 +3,7 @@ const express = require('express');
 const http  = require('http');
 const socketIO  = require('socket.io');
 
-const {generateMessage} = require('./utils/message.js')
+const {generateMessage,generateLocationMessage} = require('./utils/message.js')
 
 const publicPath = path.join(__dirname,'../public');
 var clientCount=0;
@@ -34,7 +34,14 @@ io.on('connection', (socket) => {
 	  io.emit("newMessage",generateMessage("user",message.text,clientCount));
 	  callback();
   });
-  
+
+   socket.on('createLocationMessage', (coords) => {
+   console.log("Inside createLocationMessage event");
+   console.log(JSON.stringify(generateLocationMessage('chat-server', coords.latitude, coords.longitude),undefined,2));
+   io.emit('newLocationMessage', generateLocationMessage('chat-server', coords.latitude, coords.longitude));
+  });
+	
+
   
   //On disconecting 
   socket.on('disconnect', () => {
@@ -43,6 +50,11 @@ io.on('connection', (socket) => {
   });
 });
 
+app.get("/usercount",(req,res)=>{
+	
+	res.status(200).send(`${clientCount}`);
+	
+});
 
 app.use(express.static(publicPath));
 app.set('port', (process.env.PORT || 3000))
