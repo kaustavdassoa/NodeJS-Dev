@@ -54,7 +54,8 @@ io.on('connection', (socket) => {
   //receiving createMessage event
   socket.on('createMessage',(message,callback) =>{
 	  console.log("received client event"+"welcome "+message.from+" message received-"+message.text);
-	  io.emit("newMessage",generateMessage(message.from,message.text,clientCount));
+	// io.emit("newMessage",generateMessage(message.from,message.text,clientCount));
+	 io.emit("newMessage",generateMessage(users.getUser(_id).name,message.text,clientCount));
 	  callback();
   });
 
