@@ -158,7 +158,7 @@ button:disabled {
 
 .message {
 	padding: 10px;
-	background: #dffcff;
+	background: #DEE4EA;
 	border-radius: .4em;
 	margin-top: 5px;
 	margin-bottom: 5px
@@ -172,7 +172,7 @@ button:disabled {
 	width: 0;
 	height: 0;
 	border: 19px solid transparent;
-	border-right-color: #dffcff;
+	border-right-color: #DEE4EA;
 	border-left: 0;
 	border-bottom: 0;
 	margin-top: -9.5px;
