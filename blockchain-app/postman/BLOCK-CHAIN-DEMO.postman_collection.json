@@ -1,0 +1,62 @@
+{
+	"variables": [],
+	"info": {
+		"name": "BLOCK-CHAIN-DEMO",
+		"_postman_id": "83939fa9-527e-4cce-0d96-67ab394f8ad0",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/blockchain",
+			"request": {
+				"url": "http://localhost:3000/blockchain",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\n\t\"amount\": 10,\n\t\"sender\": \"1dsfwensdsyrqw3\",\n\t\"reciepient\" : \"awrwebsfdkms223\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/transaction",
+			"request": {
+				"url": "http://localhost:3000/transaction",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\n\t\"amount\": 10,\n\t\"sender\": \"1dsfwensdsyrqw3\",\n\t\"reciepient\" : \"awrwebsfdkms223\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/mine",
+			"request": {
+				"url": "http://localhost:3000/mine",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
