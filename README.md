@@ -11,6 +11,8 @@ This is a demo repository to host & store all my node JS sample applications. Ov
 
 ###### **express-chat-app**|*Express Chat Application*||AddedOn:08/04/2018 [APP URL](https://kaustavdassoa.herokuapp.com/)
 
+###### **blockchain-app**|*Express Block Chain Application to understand basic functionality of the blockchain – view a blockchain, create new transaction, mine new block, decentralized hosting, synchronization etc. *||AddedOn:30/30/2018 
+
 # Git Commands
 
 ```
