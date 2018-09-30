@@ -89,21 +89,71 @@ app.get('/mine',(req,res)=>{
    };
    const nonce =bitcoin.proofOfWork(lastBlockHash,currentBlockData);
    const currentBlockHash = bitcoin.hashBlock(lastBlockHash,currentBlockData,nonce);
-   
-   //console.log("currentBlock "+ JSON.stringify(currentBlockData,undefined,2));
-   
-   bitcoin.createNewTransaction(12.5,"00",nodeAddress);
-   
    const newBlock =bitcoin.createNewBlock(nonce,lastBlockHash,currentBlockHash);
    
+   /***/
+   const requestPromises = [];
+   bitcoin.networkNodes.forEach(networkNodeUrl => {
+	   const requestOptions = {
+			uri: networkNodeUrl + '/receive-new-block',
+			method: 'POST',
+			body: { newBlock: newBlock },
+			json: true
+		};
+		requestPromises.push(rp(requestOptions));
+   });
    
-   res.json({ 
-    notes : `new block added to index # ${newBlock['index']}`,
-	node : newBlock
-	}); 
+   Promise.all(requestPromises)
+   .then(data => {
+	   //bitcoin.createNewTransaction(12.5,"00",nodeAddress);
+	   const requestOptions = {
+			uri: bitcoin.currentNodeURL + '/transaction/boradcast',
+			method: 'POST',
+			body: {
+				amount: 12.5,
+				sender: "00",
+				recipient: nodeAddress
+			},
+			json: true
+		};
 
+		return rp(requestOptions);
+	   
+   })
+   .then(data => {
+	   res.json({ 
+					notes : `new block added to index # ${newBlock['index']}`,
+					node : newBlock
+				});
+   });
+   
+   /***/
+  
 });
 
+
+
+// receive new block
+app.post('/receive-new-block', function(req, res) {
+	const newBlock = req.body.newBlock;
+	const lastBlock = bitcoin.getLastBlock();
+	const correctHash = lastBlock.hash === newBlock.previousBlockHash; 
+	const correctIndex = lastBlock['index'] + 1 === newBlock['index'];
+
+	if (correctHash && correctIndex) {
+		  bitcoin.chain.push(newBlock);
+		  bitcoin.pendingTransaction = [];
+		res.json({
+			note: 'New block received and accepted.',
+			newBlock: newBlock
+		});
+	} else {
+		res.json({
+			note: 'New block rejected.',
+			newBlock: newBlock
+		});
+	}
+});
 //**********************register-and-broadcast-node**********************
 //       URLS : register-and-broadcast-node
 //       DESC : Register and broadcast node URL to other node in the network 
