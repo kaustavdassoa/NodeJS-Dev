@@ -9,7 +9,7 @@ function Blockchain(){
 	this.networkNodes = [];
 	
 	//adding genesis block 
-	this.createNewBlock(0,'0','0');
+	this.createNewBlock(100,'0','0');
 }
 
 
@@ -64,7 +64,10 @@ Blockchain.prototype.createNewTransaction = function (amount,sender,reciepient){
 	//return (this.getLastBlock()['index']) +1; /**Return index of the block to which this transaction should be added to**/
 }
 
-
+/* 
+Method Name : pushTransactionTopendingTransaction
+Description : push Transaction to Pending Transaction
+*/
 Blockchain.prototype.pushTransactionTopendingTransaction = function (transaction){
 	
 	this.pendingTransaction.push(transaction);
@@ -99,6 +102,32 @@ Blockchain.prototype.proofOfWork = function(previousBlockHash,currentBlockData) 
 	
 	return nonce;
 }
+
+
+Blockchain.prototype.chainIsValid = function(blockchain) {
+	let validChain = true;
+	
+	for (var i = 1; i < blockchain.length; i++) {
+		const currentBlock = blockchain[i];
+		const prevBlock = blockchain[i - 1];
+		const blockHash = this.hashBlock(prevBlock['hash'], { transaction: currentBlock['transaction'], index: currentBlock['index'] }, currentBlock['nonce']);
+		if (blockHash.substring(0, 4) !== '0000') validChain = false;
+		if (currentBlock['previousBlockHash'] !== prevBlock['hash']) validChain = false;
+	};
+
+	
+	
+	const genesisBlock = blockchain[0];
+	const correctNonce = genesisBlock['nonce'] === 100;
+	const correctPreviousBlockHash = genesisBlock['previousBlockHash'] === '0';
+	const correctHash = genesisBlock['hash'] === '0';
+	const correctTransactions = genesisBlock['transaction'].length === 0;
+
+	if (!correctNonce || !correctPreviousBlockHash || !correctHash || !correctTransactions) validChain = false;
+
+	return validChain;
+}//chainIsValid
+
 
 
 Blockchain.prototype.setcurrentNodeURL = function(currentNodeURL) {
